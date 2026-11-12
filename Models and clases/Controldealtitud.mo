@@ -15,9 +15,8 @@ class Controldealtitud
   output Real P_cmd(unit = "W") "Potencia eléctrica pedida";
   
   SI.Height h_ref "Altitud objetivo";
-  SI.Power P_prof "Potencia del perfil por tramos";
   
 equation
   h_ref = if sinAlpha > sinAlpha_switch then h_day else h_night;
-  P_cmd = noEvent(max(0, min(P_max, if mode == 1 then P_level / eta + Kp * (h_ref - h) else P_prof)));
+  P_cmd = noEvent(max(0, min(P_max, P_level / eta + Kp * (h_ref - h))));
 end Controldealtitud;
